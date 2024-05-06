@@ -4,8 +4,6 @@ services:
     build: .
   db:
     image: postgres:16.2-bookworm
-    ports:
-      - 5434:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
