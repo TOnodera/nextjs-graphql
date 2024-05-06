@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  app:
+    build: .
+  dev-postgres:
+    image: postgres:16.2-bookworm
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: udemy
+      POSTGRES_PASSWORD: udemy
+      POSTGRES_DB: udemy
