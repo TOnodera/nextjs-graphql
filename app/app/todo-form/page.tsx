@@ -1,7 +1,17 @@
 import React from "react";
-import handler from "./actions";
+import { gql } from "urql";
+import { getClient } from "@/graphql/client";
 
-export const Page = () => {
+const GetTodoListQuery = gql`
+  query {
+    listTodos {
+      id
+    }
+  }
+`;
+
+export const Page = async () => {
+  const result = await getClient().query(GetTodoListQuery, {});
   return (
     <>
       <ul>
