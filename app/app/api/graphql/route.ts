@@ -1,29 +1,20 @@
 import { createYoga, createSchema } from "graphql-yoga";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { resolvers } from "@/graphql/resolver";
+import { readFileSync } from "fs";
+import { join } from "path";
+import { createContext } from "@/graphql/context";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+const path = join(process.cwd(), "generated", "schema.graphql");
+const typeDefs = readFileSync(path).toString("utf-8");
 
-const { handleRequest } = createYoga<{
-  req: NextApiRequest;
-  res: NextApiResponse;
-}>({
+const { handleRequest } = createYoga({
   schema: createSchema({
-    typeDefs: /* GraphQL */ `
-      type Query {
-        greetings: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        greetings: () =>
-          "This is the `greetings` field of the root `Query` type",
-      },
-    },
+    typeDefs,
+    resolvers,
   }),
+  context: createContext,
+  fetchAPI: { Response },
   graphqlEndpoint: "/api/graphql",
 });
 

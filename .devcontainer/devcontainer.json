@@ -39,7 +39,8 @@
 			"extensions": [
 				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",
-				"prisma.prisma"
+				"prisma.prisma",
+				"apollographql.vscode-apollo"
 			],
 			"settings": {
 				"[typescript]": {
